@@ -1,0 +1,647 @@
+[
+    {
+        "caption": "Preferences",
+        "children": [
+            {
+                "caption": "Package Settings",
+                "children": [
+                    {
+                        "caption": "Stino (Arduino Like IDE)",
+                        "children": [
+                            {
+                                "args": {
+                                    "file": "${packages}/User/Stino/app_dir.stino-settings"
+                                },
+                                "caption": "App Dir Setting",
+                                "command": "open_file"
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "args": {
+                                    "file": "${packages}/User/Stino/Default (OSX).sublime-keymap",
+                                    "platform": "OSX"
+                                },
+                                "caption": "Key Bindings - User",
+                                "command": "open_file"
+                            },
+                            {
+                                "args": {
+                                    "file": "${packages}/User/Stino/Default (Linux).sublime-keymap",
+                                    "platform": "Linux"
+                                },
+                                "caption": "Key Bindings - User",
+                                "command": "open_file"
+                            },
+                            {
+                                "args": {
+                                    "file": "${packages}/User/Stino/Default (Windows).sublime-keymap",
+                                    "platform": "Windows"
+                                },
+                                "caption": "Key Bindings - User",
+                                "command": "open_file"
+                            },
+                            {
+                                "caption": "-"
+                            }
+                        ]
+                    }
+                ],
+                "id": "package-settings",
+                "mnemonic": "P"
+            }
+        ],
+        "id": "preferences",
+        "mnemonic": "n"
+    },
+    {
+        "caption": "Arduino",
+        "mnemonic": "A",
+        "id": "arduino",
+        "children":
+        [
+            {
+                "caption": "Open Sketch",
+                "id": "stino_sketchbook",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_sketchbook",
+                        "command": "stino_refresh_sketchbook"
+                    },
+                    {
+                        "caption": "Change Location...",
+                        "id": "stino_change_sketchbook_location",
+                        "command": "stino_change_sketchbook_location"
+                    },
+                    {
+                        "caption": "In New Window",
+                        "id": "stino_open_in_new_win",
+                        "command": "stino_open_in_new_win",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "All Source Files",
+                        "id": "stino_open_all_src",
+                        "command": "stino_open_all_src",
+                        "checkbox": true
+                    },
+                    {"caption": "-"},
+                    {
+                        "caption": "New Sketch...",
+                        "id": "stino_new_sketch",
+                        "command": "stino_new_sketch"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Show Sketch Folder",
+                "id": "stino_show_sketch_dir",
+                "command": "stino_show_sketch_dir"
+            },
+            {"caption": "-"},
+            {
+                "caption": "Open Example",
+                "id": "stino_examples",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_examples",
+                        "command": "stino_refresh_examples"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Import Library",
+                "id": "stino_import_library",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_libraries",
+                        "command": "stino_refresh_libraries"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Install Library",
+                "id": "stino_install_library",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_install_library",
+                        "command": "stino_refresh_install_library"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {"caption": "-"},
+            {
+                "id": "stino_platform_info",
+                "command": "stino_platform_info"
+            },
+            {
+                "caption": "Install Platform",
+                "id": "stino_install_platform",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_install_platform",
+                        "command": "stino_refresh_install_platform"
+                    },
+                    {
+                        "caption": "Add Package",
+                        "id": "stino_add_package",
+                        "command": "stino_add_package"
+                    },
+                    {
+                        "caption": "Add Arduino IDE",
+                        "id": "stino_add_ide",
+                        "command": "stino_add_ide"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Platform",
+                "id": "stino_platform",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_platforms",
+                        "command": "stino_refresh_platforms"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Version",
+                "id": "stino_platform_version",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_platform_versions",
+                        "command": "stino_refresh_platform_versions"
+                    },
+                    {
+                        "caption": "Check Toolchain",
+                        "id": "stino_check_tools",
+                        "command": "stino_check_tools"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Open Platform Example",
+                "id": "stino_platform_examples",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_platform_examples",
+                        "command": "stino_refresh_platform_examples"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Import Platform Library",
+                "id": "stino_import_platform_library",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_platform_libraries",
+                        "command": "stino_refresh_platform_libraries"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {"caption": "-"},
+            {
+                "id": "stino_board_info",
+                "command": "stino_board_info"
+            },
+            {
+                "caption": "Build",
+                "id": "stino_build",
+                "command": "stino_build"
+            },
+            {
+                "caption": "Board",
+                "id": "stino_board",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_boards",
+                        "command": "stino_refresh_boards"
+                    },
+                    {
+                        "caption": "Save for Current Sketch",
+                        "id": "stino_save_for_sketch",
+                        "command": "stino_save_for_sketch"
+                    },
+                    {
+                        "caption": "Remove Current Sketch Settings",
+                        "id": "stino_remove_sketch_settings",
+                        "command": "stino_remove_sketch_settings"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Board Options",
+                "id": "board_options",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_board_options",
+                        "command": "stino_refresh_board_options"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Build Options",
+                "id": "build_options",
+                "children":
+                [
+                    {
+                        "caption": "Build Enabled",
+                        "id": "stino_build_enabled",
+                        "command": "stino_toggle_build_enabled",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "Extra Flags",
+                        "id": "stino_set_extra_flag",
+                        "command": "stino_set_extra_flag"
+                    },
+                    {
+                        "caption": "Save sketch before build",
+                        "id": "stino_save_before_build",
+                        "command": "stino_save_before_build",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "Full Build",
+                        "id": "stino_full_build",
+                        "command": "stino_toggle_full_build",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "Show Build Output",
+                        "id": "stino_show_build_output",
+                        "command": "stino_show_build_output",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "Show Upload Output",
+                        "id": "stino_show_upload_output",
+                        "command": "stino_show_upload_output",
+                        "checkbox": true
+                    },
+                    {
+                        "caption": "Verify Code after Upload",
+                        "id": "stino_verify_code",
+                        "command": "stino_verify_code",
+                        "checkbox": true
+                    }
+                ]
+            },
+            {
+                "caption": "Export Compiled Binary",
+                "id": "stino_export_binary",
+                "command": "stino_export_binary"
+            },
+            {
+                "caption": "Show Build Folder",
+                "id": "stino_show_build_dir",
+                "command": "stino_show_build_dir"
+            },
+            {"caption": "-"},
+            {
+                "id": "stino_serial_info",
+                "command": "stino_serial_info"
+            },
+            {
+                "caption": "Upload",
+                "id": "stino_upload",
+                "command": "stino_upload"
+            },
+            {
+                "caption": "Network Port",
+                "id": "stino_network_port",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_network_ports",
+                        "command": "stino_refresh_network_ports"
+                    },
+                    {
+                        "caption": "Add Connection...",
+                        "id": "stino_add_connection",
+                        "command": "stino_add_connection"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Serial Port",
+                "id": "stino_serial_port",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_serials",
+                        "command": "stino_refresh_serials"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Serial Monitor",
+                "id": "stino_serial_monitor",
+                "children":
+                [
+                    {
+                        "caption": "Start",
+                        "id": "stino_serial_monitor_start",
+                        "command": "stino_serial_monitor_start"
+                    },
+                    {
+                        "caption": "Stop",
+                        "id": "stino_serial_monitor_stop",
+                        "command": "stino_serial_monitor_stop"
+                    },
+                    {"caption": "-"},
+                    {
+                        "caption": "Auto Scroll",
+                        "id": "stino_serial_monitor_scroll",
+                        "command": "stino_serial_monitor_toggle_scroll"
+                    },
+                    {
+                        "caption": "Baudrate",
+                        "id": "stino_serial_baudrate",
+                        "children":
+                        [
+                            {
+                                "caption": "300",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "300"}
+                            },
+                            {
+                                "caption": "600",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "600"}
+                            },
+                            {
+                                "caption": "1200",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "1200"}
+                            },
+                            {
+                                "caption": "4800",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "4800"}
+                            },
+                            {
+                                "caption": "9600",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "9600"}
+                            },
+                            {
+                                "caption": "19200",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "19200"}
+                            },
+                            {
+                                "caption": "38400",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "38400"}
+                            },
+                            {
+                                "caption": "57600",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "57600"}
+                            },
+                            {
+                                "caption": "74880",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "74880"}
+                            },
+                            {
+                                "caption": "115200",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "115200"}
+                            },
+                            {
+                                "caption": "230400",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "230400"}
+                            },
+                            {
+                                "caption": "250000",
+                                "id": "stino_select_baudrate",
+                                "command": "stino_select_baudrate",
+                                "args": {"baudrate": "250000"}
+                            }
+                        ]
+                    },
+                    {
+                        "caption": "Line Ending",
+                        "id": "stino_serial_line_ending",
+                        "children":
+                        [
+                            {
+                                "caption": "No Line Ending",
+                                "id": "stino_select_line_ending",
+                                "command": "stino_select_line_ending",
+                                "args": {"line_ending": "None"}
+                            },
+                            {
+                                "caption": "New Line",
+                                "id": "stino_select_line_ending",
+                                "command": "stino_select_line_ending",
+                                "args": {"line_ending": "NL"}
+                            },
+                            {
+                                "caption": "Carriage Return",
+                                "id": "stino_select_line_ending",
+                                "command": "stino_select_line_ending",
+                                "args": {"line_ending": "CR"}
+                            },
+                            {
+                                "caption": "Both NL & CR",
+                                "id": "stino_select_line_ending",
+                                "command": "stino_select_line_ending",
+                                "args": {"line_ending": "NL_CR"}
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "caption": "Get Port Info",
+                "id": "stino_get_port_info",
+                "command": "stino_get_port_info"
+            },
+            {"caption": "-"},
+            {
+                "id": "stino_programmer_info",
+                "command": "stino_programmer_info"
+            },
+            {
+                "caption": "Upload by Using Programmer",
+                "id": "stino_upload_using_programmer",
+                "command": "stino_upload_using_programmer"
+            },
+            {
+                "caption": "Programmer",
+                "id": "stino_programmer",
+                "children":
+                [
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_programmers",
+                        "command": "stino_refresh_programmers"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {"caption": "-"},
+            {
+                "caption": "Backup Binary from Device",
+                "id": "stino_backup_bin_file",
+                "command": "stino_backup_bin_file"
+            },
+            {
+                "caption": "Upload Binary File",
+                "id": "stino_upload_bin_file",
+                "command": "stino_upload_bin_file"
+            },
+            {
+                "caption": "Upload Binary File by Using Programmer",
+                "id": "stino_upload_bin_file_by_programmer",
+                "command": "stino_upload_bin_file_by_programmer"
+            },
+            {
+                "caption": "Burn Bootloader",
+                "id": "stino_burn_bootloader",
+                "command": "stino_burn_bootloader"
+            },
+            {"caption": "-"},
+            {
+                "caption": "Auto Format",
+                "id": "stino_auto_format",
+                "command": "stino_auto_format"
+            },
+            {
+                "caption": "Indent by",
+                "id": "stino_indent_options",
+                "children":
+                [
+                    {
+                        "caption": "Tab",
+                        "id": "stino_select_indent_char",
+                        "command": "stino_select_indent_char",
+                        "args": {"indent_char": "tab"}
+                    },
+                    {
+                        "caption": "2 Spaces",
+                        "id": "stino_select_indent_char",
+                        "command": "stino_select_indent_char",
+                        "args": {"indent_char": "2"}
+                    },
+                    {
+                        "caption": "4 Spaces",
+                        "id": "stino_select_indent_char",
+                        "command": "stino_select_indent_char",
+                        "args": {"indent_char": "4"}
+                    }
+                ]
+            },
+            {"caption": "-"},
+            {
+                "caption": "Show Message Panel",
+                "id": "stino_show_panel",
+                "command": "stino_show_panel",
+                "args": {"panel_name": "stino_panel"}
+            },
+            {
+                "caption": "Show Build Message Panel",
+                "id": "stino_show_panel",
+                "command": "stino_show_panel",
+                "args": {"panel_name": "stino_build_panel"}
+            },
+            {
+                "caption": "Language",
+                "id": "stino_language",
+                "children":
+                [
+                    {
+                        "caption": "Install",
+                        "id": "stino_install_languages",
+                        "children":
+                        [
+                            {"caption": "-"}
+                        ]
+                    },
+                    {
+                        "caption": "Refresh",
+                        "id": "stino_refresh_languages",
+                        "command": "stino_refresh_languages"
+                    },
+                    {"caption": "-"}
+                ]
+            },
+            {
+                "caption": "Help",
+                "id": "stino_help",
+                "children":
+                [
+                    {
+                        "caption": "Arduino Documents",
+                        "id": "stino_documents",
+                        "command": "open_url",
+                        "args": {"url": "https://www.arduino.cc/en/Reference/HomePage"}
+                    },
+                    {
+                        "caption": "Platform Documents",
+                        "id": "stino_platform_documents",
+                        "command": "stino_open_platform_documents"
+                    },
+                    {
+                        "caption": "About Stino",
+                        "id": "stino_about",
+                        "command": "stino_about"
+                    }
+                ]
+            }
+        ]
+    }
+]
