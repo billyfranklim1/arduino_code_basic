@@ -1,0 +1,295 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "int segundo, minuto, hora, dia, mes, ano;\nunsigned long UtlTime;\n#include <SPI.h>\n#include <MFRC522.h>\n#include <TimeLib.h>\n\n#define SS_PIN 53\n#define RST_PIN 5\n// Definicoes pino modulo RC522\nMFRC522 mfrc522(SS_PIN, RST_PIN);\n\nchar st[20];\nString nome = \"Billyfranklim\" ;\nString giselly = \"Giselly\" ;\nString ru = \"CAU : Billyfranklim\" ;\nString billy = \"Billy\" ;\nString prof = \"Kenio\";\nint teste = 0 ;\nint teste1 = 0;\nint teste2 = 0;\nint pro = 0;\n\n\nvoid setup()\n{\n\n  Serial.begin(9600);\n  // Inicia  SPI bus\n  SPI.begin();\n  // Inicia MFRC522\n  mfrc522.PCD_Init();\n  // Mensagens iniciais no serial monitor\n  Serial.print(\"Aproxime o seu cartao do leitor...\");\n  Serial.println();\n\n  UtlTime = 0;\n  minuto = 28;\n  hora = 16;\n  dia = 9;\n  mes = 9;\n  ano = 2017;\n}\n\nvoid loop()\n{\n  proo();\n\n}\n\nvoid horacerta()\n{\n  if (millis() - UtlTime < 0)\n  {\n    UtlTime = millis();\n  } else\n  {\n    segundo = int((millis() - UtlTime) / 1000);\n  }\n  if (segundo > 59)\n  {\n    segundo = 0;\n    minuto++;\n\n    UtlTime = millis();\n    if (minuto > 59)\n    {\n      hora++;\n      minuto = 0;\n      if (hora > 23)\n      {\n        dia++;\n        hora = 0;\n        if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)\n        {\n          if (dia > 31)\n          {\n            dia = 1;\n            mes++;\n            if (mes > 12)\n            {\n              ano++;\n              mes = 1;\n            }\n          }\n        }\n        else if (mes == 2)\n        {\n          if (ano % 400 == 0)\n          {\n            if (dia > 29)\n            {\n              dia = 1;\n              mes++;\n            }\n          }\n          else if ((ano % 4 == 0) && (ano % 100 != 0))\n          {\n            if (dia > 29)\n            {\n              dia = 1;\n              mes++;\n            }\n          }\n          else\n          {\n            if (dia > 28)\n            {\n              dia = 1;\n              mes++;\n            }\n          }\n        }\n        else\n        {\n          if (dia > 30)\n          {\n            dia = 1;\n            mes++;\n          }\n        }\n      }\n    }\n  }\n  Serial.print(dia);\n  Serial.print(\"/\");\n  Serial.print(mes);\n  Serial.print(\"/\");\n  Serial.print(ano);\n  Serial.print(\" \");\n  Serial.print(hora);\n  Serial.print(\":\");\n  Serial.print(minuto);\n  Serial.print(\":\");\n  Serial.print(segundo);\n  Serial.print(\"\\n\");\n  //delay(500);\n}\n\nvoid proo() {\n  // Aguarda a aproximacao do cartao\n  if ( ! mfrc522.PICC_IsNewCardPresent())\n  {\n    return;\n  }\n  // Seleciona um dos cartoes\n  if ( ! mfrc522.PICC_ReadCardSerial())\n  {\n    return;\n  }\n  // Mostra UID na serial\n  Serial.println();\n  Serial.print(\"UID da tag :\");\n  //Serial.print(\"Cartão não cadastrado\");\n  //delay (2000);\n  String conteudo = \"\";\n  byte letra;\n  for (byte i = 0; i < mfrc522.uid.size; i++)\n  {\n    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \");\n    Serial.print(mfrc522.uid.uidByte[i], HEX); //printa a udi da tag\n    conteudo.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \"));\n    conteudo.concat(String(mfrc522.uid.uidByte[i], HEX));\n  }\n\n  conteudo.toUpperCase();\n\n  if (conteudo.substring(1) == \"70 B9 B8 46\")\n  {\n    if (pro == 0 ) {\n      Serial.println();\n      Serial.print(\"Seja Bem-Vindo Professor \");\n      Serial.println(prof);\n      Serial.print(\"Entrada: \");\n      horacerta();\n      delay(1500);\n    }\n\n    pro ++;\n\n    if (pro > 1) {\n      Serial.println();\n      Serial.print(\"Até mais Professor !! \");\n      Serial.println(prof);\n      Serial.print(\"Saida: \");\n      horacerta();\n      pro = 0;\n      delay(1500);\n    }\n  }\n  else if (pro == 1) {\n    if (conteudo.substring(1) == \"82 30 53 73\" or conteudo.substring(1) == \"51 84 CE 94\" or conteudo.substring(1) == \"7D 84 51 6F\") {\n      if (conteudo.substring(1) == \"82 30 53 73\")\n      {\n        if (teste < 1) {\n          teste ++;\n          Serial.println(teste);\n          Serial.println();\n          Serial.print(\"Seja Bem-Vindo \");\n          Serial.println(nome);\n          Serial.print(\"Entrada: \");\n          horacerta();\n          delay(1500);\n        }\n\n        else {\n          Serial.println();\n          Serial.print(\"Até mais!! \");\n          Serial.println(nome);\n          Serial.print(\"Saida: \");\n          horacerta();\n          teste = 0;\n          delay(1500);\n        }\n      }\n\n      else if (conteudo.substring(1) == \"51 84 CE 94\") {\n        if (teste1 < 1) {\n          teste1 ++;\n          Serial.println(giselly);\n          Serial.println();\n          Serial.print(\"Seja Bem-Vindo \");\n          Serial.println(giselly);\n          Serial.print(\"Entrada: \");\n          horacerta();\n          delay(1500);\n        }\n\n        else {\n          Serial.println();\n          Serial.print(\"Até mais!! \");\n          Serial.println(giselly);\n          Serial.print(\"Saida: \");\n          horacerta();\n          teste1 = 0;\n          delay(1500);\n        }\n      }\n\n      else if (conteudo.substring(1) == \"7D 84 51 6F\") {\n        if (teste2 < 1) {\n          teste2 ++;\n          Serial.println(billy);\n          Serial.println();\n          Serial.print(\"Seja Bem-Vindo \");\n          Serial.println(billy);\n          Serial.print(\"Entrada: \");\n          horacerta();\n          delay(1500);\n        }\n\n        else {\n          Serial.println();\n          Serial.print(\"Até mais!! \");\n          Serial.println(billy);\n          Serial.print(\"Saida: \");\n          horacerta();\n          teste2 = 0;\n          delay(1500);\n        }\n      }\n    }\n  }\nelse {\n\n  Serial.println();\n  Serial.print(\"Cartão não cadastrado\");\n  Serial.println();\n  delay(1500);\n}\n}\n\n\n\n\n\n\n/*void udi{\n    // Aguarda a aproximacao do cartao\n  if ( ! mfrc522.PICC_IsNewCardPresent())\n  {\n    return;\n  }\n  // Seleciona um dos cartoes\n  if ( ! mfrc522.PICC_ReadCardSerial())\n  {\n    return;\n  }\n  // Mostra UID na serial\n  Serial.println();\n  Serial.print(\"UID da tag :\");\n  //Serial.print(\"Cartão não cadastrado\");\n  //delay (2000);\n  String conteudo = \"\";\n  byte letra;\n  for (byte i = 0; i < mfrc522.uid.size; i++)\n  {\n    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \");\n    Serial.print(mfrc522.uid.uidByte[i], HEX); //printa a udi da tag\n    conteudo.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \"));\n    conteudo.concat(String(mfrc522.uid.uidByte[i], HEX));\n  }\n\n  conteudo.toUpperCase();\n\n\n  // Testa se o cartao1 foi lido\n  if (conteudo.substring(1) == \"82 30 53 73\")\n  {\n    if (teste < 1){\n    teste ++;\n    Serial.println(teste);\n    Serial.println();\n    Serial.print(\"Seja Bem-Vindo \");\n    Serial.println(nome);\n    Serial.print(\"Entrada: \");\n    horacerta();\n    delay(1500);\n    }\n\n    else {\n        Serial.println();\n        Serial.print(\"Até mais!! \");\n        Serial.println(nome);\n        Serial.print(\"Saida: \");\n        horacerta();\n        teste = 0;\n        delay(1500);\n        }\n       }\n\n  else if (conteudo.substring(1) == \"51 84 CE 94\")\n  {\n    if (teste < 1){\n    teste1 ++;\n    Serial.println();\n    Serial.print(\"Seja Bem-Vindo \");\n    Serial.println(giselly);\n    Serial.print(\"Entrada: \");\n    horacerta();\n    delay(1500);\n    }\n\n    else {\n        Serial.println();\n        Serial.print(\"Até mais!! \");\n        Serial.println(giselly);\n        Serial.print(\"Saida: \");\n        horacerta();\n        teste1 = 0;\n        delay(1500);\n        }\n       }\n\n  else if (conteudo.substring(1) == \"7D 84 51 6F\")\n  {\n    if (teste < 1){\n    teste2 ++;\n    Serial.println(teste);\n    Serial.println();\n    Serial.print(\"Seja Bem-Vindo \");\n    Serial.println(billy);\n    Serial.print(\"Entrada: \");\n    horacerta();\n    delay(1500);\n    }\n\n    else {\n        Serial.println();\n        Serial.print(\"Até mais!! \");\n        Serial.println(billy);\n        Serial.print(\"Saida: \");\n        horacerta();\n        teste2 = 0;\n        delay(1500);\n        }\n       }\n\n  else\n  {\n    Serial.println();\n    Serial.print(\"Cartão não cadastrado\");\n    Serial.println();\n    delay(1500);\n  }\n  }\n\n  void udi ()\n  {\n     // Aguarda a aproximacao do cartao\n  if ( ! mfrc522.PICC_IsNewCardPresent())\n  {\n    return;\n  }\n  // Seleciona um dos cartoes\n  if ( ! mfrc522.PICC_ReadCardSerial())\n  {\n    return;\n  }\n  // Mostra UID na serial\n  Serial.println();\n  Serial.print(\"UID da tag :\");\n  //Serial.print(\"Cartão não cadastrado\");\n  //delay (2000);\n  String conteudo = \"\";\n  byte letra;\n  for (byte i = 0; i < mfrc522.uid.size; i++)\n  {\n    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \");\n    Serial.print(mfrc522.uid.uidByte[i], HEX); //printa a udi da tag\n    conteudo.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? \" 0\" : \" \"));\n    conteudo.concat(String(mfrc522.uid.uidByte[i], HEX));\n  }\n\n  conteudo.toUpperCase();\n\n  if (conteudo.substring(1) == \"82 30 53 73\")\n            {\n              if (teste < 1){\n              teste ++;\n              Serial.println(teste);\n              Serial.println();\n              Serial.print(\"Seja Bem-Vindo \");\n              Serial.println(nome);\n              Serial.print(\"Entrada: \");\n              horacerta();\n              delay(1500);\n              }\n\n              else {\n                  Serial.println();\n                  Serial.print(\"Até mais!! \");\n                  Serial.println(nome);\n                  Serial.print(\"Saida: \");\n                  horacerta();\n                  teste = 0;\n                  delay(1500);\n       }\n       }\n  }\n*/",
+			"settings":
+			{
+				"buffer_size": 9311,
+				"line_ending": "Windows",
+				"name": "int segundo, minuto, hora, dia, mes, ano;"
+			}
+		},
+		{
+			"file": "/C/Users/Franklim/Desktop/testesublime.ino",
+			"settings":
+			{
+				"buffer_size": 5650,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "int pinoSensor = 0; //pino que está ligado o terminal central do LM35 (portaanalogica 0)\nint valorLido = 0; //valor lido na entrada analogica\nfloat temperatura = 0; //valorLido convertido para temperatura\nint linha = 0; // variavel que se refere as linhas do excel\nshort int Conta_Pulso;\nshort int Tanque_Vazio = 0; //variável referente ao volume\nvoid setup() {\n Serial.begin(9600); //Inicializa comunicação Serial\n Serial.println(\"CLEARDATA\"); // Reset da comunicação serial\n Serial.println(\"LABEL,Hora,Temperatura, Volume, linha\"); // Nomeia ascolunas\n pinMode(2, INPUT);\n pinMode(8, OUTPUT);\n attachInterrupt(0, incpulso, RISING); //Configura o pino 2(Interrupção 0) paratrabalhar como interrupçãoFigura 5.13 – Montagem do circuito37\n}\nvoid loop() {\n valorLido = analogRead(pinoSensor);\n temperatura = (valorLido * 0.00488); // 5V / 1023 = 0.00488 (precisão do A/D)\n temperatura = temperatura * 100; //Converte milivolts para graus celSius,lembrando que a cada 10mV equivalem a 1 grau celSius\n linha++; // incrementa a linha do excel para que a leitura pule de linha em linha\n Serial.print(\"DATA,TIME,\"); //inicia a impressão de dados, sempre iniciando\n Serial.print(temperatura);\n Serial.print(\",\");\n Serial.print(Tanque_Vazio);\n Serial.print(\",\");\n Serial.println(linha);\n\n if (linha > 100) //laço para limitar a quantidade de dados\n{\n linha = 0;\n Serial.println(\"ROW,SET,2\"); // alimentação das linhas com os dados sempre\niniciando\n}\n delay(5000); //espera 5 segundos para fazer nova leitura\n}\nvoid incpulso ()\n{\n Conta_Pulso++;\n Tanque_Vazio = Conta_Pulso * 0.972+6.36;\nint pinoSensor = 0; //pino que está ligado o terminal central do LM35 (portaanalogica 0)\nint valorLido = 0; //valor lido na entrada analogica\nfloat temperatura = 0; //valorLido convertido para temperatura\nint linha = 0; // variavel que se refere as linhas do excel\nshort int Conta_Pulso;\nshort int Tanque_Vazio = 0; //variável referente ao volume\nvoid setup() {\n Serial.begin(9600); //Inicializa comunicação Serial\n Serial.println(\"CLEARDATA\"); // Reset da comunicação serial\n Serial.println(\"LABEL,Hora,Temperatura, Volume, linha\"); // Nomeia as\ncolunas\n pinMode(2, INPUT);\n pinMode(8, OUTPUT);\n attachInterrupt(0, incpulso, RISING); //Configura o pino 2(Interrupção 0) paratrabalhar como interrupçãoFigura 5.13 – Montagem do circuito\n37\n}\nvoid loop() {\n valorLido = analogRead(pinoSensor);\n temperatura = (valorLido * 0.00488); // 5V / 1023 = 0.00488 (precisão do A/D)\n temperatura = temperatura * 100; //Converte milivolts para graus celSius,lembrando que a cada 10mV equivalem a 1 grau celSius\n linha++; // incrementa a linha do excel para que a leitura pule de linha em linha\n Serial.print(\"DATA,TIME,\"); //inicia a impressão de dados, sempre iniciando\n Serial.print(temperatura);\n Serial.print(\",\");\n Serial.print(Tanque_Vazio);\n Serial.print(\",\");\n Serial.println(linha);\n\n if (linha > 100) //laço para limitar a quantidade de dados\n{\n linha = 0;\n Serial.println(\"ROW,SET,2\"); // alimentação das linhas com os dados sempreiniciando\n}\n delay(5000); //espera 5 segundos para fazer nova leitura\n}\nvoid incpulso ()\n{\n Conta_Pulso++;\n Tanque_Vazio = Conta_Pulso * 0.972+6.36;\n}",
+			"file": "/C/Users/Franklim/Desktop/hrhhsdhsnbs.ino",
+			"file_size": 3271,
+			"file_write_time": 131497192190220871,
+			"settings":
+			{
+				"buffer_size": 3156,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Franklim/Desktop/bbbbbb.ino"
+	],
+	"find":
+	{
+		"height": 93.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"file",
+			"Fil"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9311,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								681,
+								681
+							]
+						],
+						"settings":
+						{
+							"auto_name": "int segundo, minuto, hora, dia, mes, ano;",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Franklim/Desktop/testesublime.ino",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5650,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								5650
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Stino-Stino-Dev/Arduino.sublime-syntax",
+							"tab_size": 5
+						},
+						"translation.x": 0.0,
+						"translation.y": 2175.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Franklim/Desktop/hrhhsdhsnbs.ino",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1615,
+								1615
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Stino-Stino-Dev/Arduino.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.stino_build_panel":
+	{
+		"height": 57.0
+	},
+	"output.stino_panel":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "teste_456_09_09.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

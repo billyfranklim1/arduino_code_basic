@@ -1,0 +1,1 @@
+primeiro modelo faz somente leitura do cartão rfid, porém ainda não faz busca nume base de dados
